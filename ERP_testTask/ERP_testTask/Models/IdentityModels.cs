@@ -29,5 +29,7 @@ namespace ERP_testTask.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ERP_testTask.Models.Movie> Movies { get; set; }
     }
 }
