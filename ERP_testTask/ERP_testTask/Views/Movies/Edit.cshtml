@@ -1,24 +1,22 @@
 ﻿@model ERP_testTask.Models.MovieCreateModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать информацию о фильме " + Model.Name;
 
     RouteValueDictionary routeValues = ViewContext.RouteData.Values;
 }
 
-<h2>Edit</h2>
-
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Movie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Name">Название</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -26,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Description">Описание</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -34,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Year">Год выхода</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
@@ -42,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Director, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Director">Режиссёр</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger" })
@@ -50,16 +48,17 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Poster, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Poster">Постер</label>
             <div class="col-md-10">
                 <input type="file" id="Poster" name="Poster" class="form-control" />
                 @Html.ValidationMessageFor(model => model.Poster, "", new { @class = "text-danger" })
+                Не заполняйте это поле, если не хотите менять постер.
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить изменения" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -70,8 +69,8 @@
     @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Удалить фильм" class="btn btn-danger" /> |
+        @Html.ActionLink("Вернуться к списку фильмов", "Index")
     </div>
 }
 

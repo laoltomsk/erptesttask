@@ -48,7 +48,11 @@ namespace ERP_testTask.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
-            return View(new MovieCreateModel());
+            var movie = new MovieCreateModel();
+
+            movie.Year = DateTime.Now.Year;
+
+            return View(movie);
         }
 
         // POST: Movies/Create
@@ -71,9 +75,12 @@ namespace ERP_testTask.Controllers
 
                 if (model.Poster != null)
                 {
-                    string fileName = System.IO.Path.GetFileName(model.Poster.FileName);
-                    model.Poster.SaveAs(Server.MapPath("~/Posters/" + model.Name + "_" + fileName));
-                    movie.PosterURL = "/Posters/" + model.Name + "_" + fileName;
+                    if (model.Poster.ContentType == "image/jpeg" || model.Poster.ContentType == "image/bmp")
+                    {
+                        string fileName = System.IO.Path.GetFileName(model.Poster.FileName);
+                        model.Poster.SaveAs(Server.MapPath("~/Posters/" + model.Name + "_" + fileName));
+                        movie.PosterURL = "/Posters/" + model.Name + "_" + fileName;
+                    }
                 }
 
                 db.Movies.Add(movie);
@@ -95,6 +102,11 @@ namespace ERP_testTask.Controllers
             Movie movie = db.Movies.Find(id);
 
             if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (movie.UserId != User.Identity.GetUserId())
             {
                 return HttpNotFound();
             }
