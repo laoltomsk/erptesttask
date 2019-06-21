@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ERP_testTask.Models;
@@ -19,23 +20,24 @@ namespace ERP_testTask.Controllers
 
         // GET: Movies
         [AllowAnonymous]
-        public ActionResult Index(int? page)
+        public async Task<ActionResult> Index(int? page)
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(db.Movies.OrderByDescending(movie => movie.Id).ToPagedList(pageNumber, pageSize));
+            var model = await (db.Movies).ToListAsync();
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Movies/Details/5
         [AllowAnonymous]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            Movie movie = db.Movies.Find(id);
+            Movie movie = await db.Movies.FindAsync(id);
 
             if (movie == null)
             {
@@ -60,7 +62,7 @@ namespace ERP_testTask.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MovieCreateModel model)
+        public async Task<ActionResult> Create(MovieCreateModel model)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +86,7 @@ namespace ERP_testTask.Controllers
                 }
 
                 db.Movies.Add(movie);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = movie.Id });
             }
 
@@ -92,14 +94,14 @@ namespace ERP_testTask.Controllers
         }
 
         // GET: Movies/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            Movie movie = db.Movies.Find(id);
+            Movie movie = await db.Movies.FindAsync(id);
 
             if (movie == null)
             {
@@ -127,14 +129,14 @@ namespace ERP_testTask.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Int32? id, MovieCreateModel model)
+        public async Task<ActionResult> Edit(Int32? id, MovieCreateModel model)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            Movie movie = db.Movies.Find(id);
+            Movie movie = await db.Movies.FindAsync(id);
 
             if (movie == null)
             {
@@ -161,7 +163,7 @@ namespace ERP_testTask.Controllers
                 }
 
                 db.Entry(movie).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = movie.Id });
             }
             return View(movie);
@@ -170,14 +172,14 @@ namespace ERP_testTask.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public async Task<ActionResult> DeleteConfirmed(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
 
-            Movie movie = db.Movies.Find(id);
+            Movie movie = await db.Movies.FindAsync(id);
 
             if (movie == null)
             {
@@ -190,7 +192,7 @@ namespace ERP_testTask.Controllers
             }
 
             db.Movies.Remove(movie);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }
