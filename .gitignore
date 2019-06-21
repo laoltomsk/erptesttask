@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/ERP_testTask/ERP_testTask/Posters/snap_screen_20190523161434.png
+/ERP_testTask/ERP_testTask/Posters/Kukareku!_snap_screen_20190523161434.png
+/ERP_testTask/ERP_testTask/Posters/Kukareku!_2018-06-22-0042.jpg
+/ERP_testTask/ERP_testTask/Posters/dddd_2018-06-22-0049.jpg

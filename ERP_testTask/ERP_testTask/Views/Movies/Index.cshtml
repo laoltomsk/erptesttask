@@ -1,5 +1,5 @@
-﻿@model IEnumerable<ERP_testTask.Models.Movie>
-
+﻿@model PagedList.IPagedList<ERP_testTask.Models.Movie>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
 }
@@ -12,46 +12,49 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Название
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Описание
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Year)
+            Год выхода
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Director)
+            Режиссёр
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PosterURL)
+            Адрес постера
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Director)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PosterURL)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PosterURL)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

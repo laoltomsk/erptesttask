@@ -13,7 +13,7 @@ namespace ERP_testTask.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201906200547237_AddMovies"; }
+            get { return "201906200644491_AddMovies"; }
         }
         
         string IMigrationMetadata.Source

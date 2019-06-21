@@ -12,23 +12,23 @@ namespace ERP_testTask.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
                         Name = c.String(),
                         Description = c.String(),
                         Year = c.Int(nullable: false),
                         Director = c.String(),
                         PosterURL = c.String(),
-                        User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
-                .Index(t => t.User_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Movies", "User_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.Movies", new[] { "User_Id" });
+            DropForeignKey("dbo.Movies", "UserId", "dbo.AspNetUsers");
+            DropIndex("dbo.Movies", new[] { "UserId" });
             DropTable("dbo.Movies");
         }
     }

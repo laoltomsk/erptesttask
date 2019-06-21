@@ -5,14 +5,8 @@ using System.Web;
 
 namespace ERP_testTask.Models
 {
-    public class Movie
+    public class MovieCreateModel
     {
-        public ApplicationUser User { get; set; }
-
-        public string UserId { get; set; }
-
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -21,6 +15,6 @@ namespace ERP_testTask.Models
 
         public string Director { get; set; }
 
-        public string PosterURL { get; set; }
+        public HttpPostedFileBase Poster { get; set; }
     }
 }

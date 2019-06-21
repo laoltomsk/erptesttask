@@ -46,6 +46,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -184,15 +190,16 @@
     <Compile Include="Migrations\201906200528422_InitialCreate.Designer.cs">
       <DependentUpon>201906200528422_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906200547237_AddMovies.cs" />
-    <Compile Include="Migrations\201906200547237_AddMovies.Designer.cs">
-      <DependentUpon>201906200547237_AddMovies.cs</DependentUpon>
+    <Compile Include="Migrations\201906200644491_AddMovies.cs" />
+    <Compile Include="Migrations\201906200644491_AddMovies.Designer.cs">
+      <DependentUpon>201906200644491_AddMovies.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MovieCreateModel.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -202,6 +209,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -253,13 +261,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Movies\Create.cshtml" />
-    <Content Include="Views\Movies\Delete.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Posters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -278,8 +286,8 @@
     <EmbeddedResource Include="Migrations\201906200528422_InitialCreate.resx">
       <DependentUpon>201906200528422_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906200547237_AddMovies.resx">
-      <DependentUpon>201906200547237_AddMovies.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906200644491_AddMovies.resx">
+      <DependentUpon>201906200644491_AddMovies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
